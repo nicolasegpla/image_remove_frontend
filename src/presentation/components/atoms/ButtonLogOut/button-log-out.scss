@@ -1,0 +1,29 @@
+@import '@/presentation/styles/index.scss';
+
+.button-log-out {
+    width: 10rem;
+    height: 2.5rem;
+    background-color: #000000;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #ffffff;
+        transition: all 0.3s ease;
+    }
+    &:hover {
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+        p {
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+    }
+}

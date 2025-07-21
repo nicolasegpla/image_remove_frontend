@@ -4,11 +4,14 @@ import './preview-image.scss';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '@/store/context/global/GlobalContext';
 
 export function PreviewImage() {
     const { imageUrl } = useImageSelectStore();
     const { setToken } = useTokenStore();
     const navigate = useNavigate();
+    const { urlImageExistent } = useContext(GlobalContext);
 
     const handleDownload = () => {
         const link = document.createElement('a');
@@ -25,9 +28,16 @@ export function PreviewImage() {
 
     return (
         <FormSelectImage>
+            <div className="preview-image__title">
+                <h2>Preview image</h2>
+                <p>Here you can see the image you have uploaded.</p>
+            </div>
             <PreviewTransform urlImage={imageUrl} />
-            <PrimaryButton textButton="Descargar imagen" onClick={handleDownload} />
-            <PrimaryButton textButton="LogOut" onClick={handleLogOut} />
+            <PrimaryButton
+                textButton="Download Image"
+                onClick={handleDownload}
+                disabled={urlImageExistent}
+            />
         </FormSelectImage>
     );
 }

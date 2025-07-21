@@ -1,7 +1,12 @@
 import { Login } from '@/presentation/components/organisms';
+import { LayoutLogin } from '@/presentation/layouts/LayoutLogin/LayoutLogin';
 
 function LoginPage() {
-    return <Login />;
+    return (
+        <LayoutLogin>
+            <Login />
+        </LayoutLogin>
+    );
 }
 
 export default LoginPage;

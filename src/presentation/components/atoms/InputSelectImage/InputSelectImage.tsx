@@ -12,7 +12,8 @@ export function InputSelectImage({ onChange, filename, errorFile }: InputSelectI
     return (
         <div className="input-select-image">
             <div className="input-select-image__title">
-                <h2>Transformar imagen</h2>
+                <h2>Upload your image</h2>
+                <p>File should be an image (png, jpg, jpeg) to transform.</p>
             </div>
             <div className="drag-drop-relative">
                 {
@@ -27,7 +28,9 @@ export function InputSelectImage({ onChange, filename, errorFile }: InputSelectI
                 }
                 <div className="input-drag-drop">
                     <FolderOpenIcon className="input-drag-drop__icon" />
-                    <p>Choose your files here</p>
+                    <p>
+                        Choose your files here or <br /> drag and drop
+                    </p>
                 </div>
                 {filename && <p className="p-selected-file">Archivo seleccionado: {filename}</p>}
                 {errorFile && (

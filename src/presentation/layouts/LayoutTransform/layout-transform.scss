@@ -1,10 +1,11 @@
 @import '@/presentation/styles/index.scss';
 
-.layout-login {
+.layout-transform {
     width: 100vw;
     height: 100dvh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-color: #000000;
+    justify-content: flex-start;
+    background-color: #ffffff;
 }

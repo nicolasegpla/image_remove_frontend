@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { FormSelectImage } from '@/presentation/components/molecules';
 import { InputSelectImage, PrimaryButton } from '@/presentation/components/atoms';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 
 import './select-image.scss';
+import { GlobalContext } from '@/store/context/global/GlobalContext';
 
 export function SelectImage() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [errorFile, setErrorFile] = useState(false);
     const [errorSizeFile, setErrorSizeFile] = useState(false);
     const { setImageUrl } = useImageSelectStore();
+    const { setUrlImageExistent } = useContext(GlobalContext);
+
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -26,6 +30,7 @@ export function SelectImage() {
         }
 
         setSelectedFile(file);
+        setIsDisabled(false);
         event.target.value = ''; // para permitir volver a subir el mismo archivo
         setErrorFile(false);
     };
@@ -53,6 +58,9 @@ export function SelectImage() {
         const imageUrl = URL.createObjectURL(blob);
 
         setImageUrl(imageUrl);
+        setUrlImageExistent(false);
+        setSelectedFile(null);
+        setIsDisabled(true);
     };
 
     return (
@@ -62,7 +70,11 @@ export function SelectImage() {
                 filename={selectedFile?.name || ''}
                 errorFile={errorFile}
             />
-            <PrimaryButton textButton="Transformar imagen" onClick={handleSubmit} />
+            <PrimaryButton
+                textButton="Transform image"
+                onClick={handleSubmit}
+                disabled={isDisabled}
+            />
         </FormSelectImage>
     );
 }

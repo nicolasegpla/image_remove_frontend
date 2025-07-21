@@ -1,9 +1,15 @@
 @import '@/presentation/styles/index.scss';
 
 .preview-transform {
-    width: 500px;
-    height: 500px;
+    width: 476px;
+    height: 520px;
+    padding: 1rem;
     overflow: hidden;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #BDBDBD;
     &__image {
         width: 100%;
         height: 100%;

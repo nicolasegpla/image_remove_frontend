@@ -1,5 +1,21 @@
-@import '@/presentation/styles/index.scss';
+@use '@/presentation/styles/mixins' as *;
+@import '@/presentation/styles/index.scss'; 
+
+
 
 .form-login {
-    // Estilos del componente
+    position: relative;
+    width: 46.875rem;
+    height: 70%;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    @include responsive(mobile) {
+        width: 90%;
+    }
 }

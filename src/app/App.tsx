@@ -5,6 +5,7 @@ import { useRoutesProvider } from '@/presentation/routes/useRoutesProvider';
 
 import './App.scss';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
+import { GlobalContextProvider } from '@/store/context/global/GlobalContext';
 
 function AppContent() {
     const { token } = useTokenStore();
@@ -31,7 +32,9 @@ function App() {
     return (
         <>
             <BrowserRouter>
-                <AppContent />
+                <GlobalContextProvider>
+                    <AppContent />
+                </GlobalContextProvider>
             </BrowserRouter>
         </>
     );

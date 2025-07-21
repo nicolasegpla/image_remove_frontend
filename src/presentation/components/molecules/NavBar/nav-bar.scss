@@ -1,10 +1,11 @@
 @import '@/presentation/styles/index.scss';
 
-.layout-login {
+.nav-bar {
     width: 100vw;
-    height: 100dvh;
+    height: 5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
     background-color: #000000;
 }

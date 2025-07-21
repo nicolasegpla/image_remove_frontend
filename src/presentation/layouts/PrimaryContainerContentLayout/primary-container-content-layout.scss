@@ -1,0 +1,10 @@
+@import '@/presentation/styles/index.scss';
+
+.primary-container-content-layout {
+    width: 100vw;
+    height: calc(100dvh - 5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #ffffff;
+}

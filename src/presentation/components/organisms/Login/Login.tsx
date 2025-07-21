@@ -7,6 +7,7 @@ import { FormLogin } from '@/presentation/components/molecules';
 import './login.scss';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export function Login() {
     const navigate = useNavigate();
@@ -15,6 +16,8 @@ export function Login() {
         username: '',
         password: '',
     });
+
+    const [passwordOrUsernameIsInvalid, setPasswordOrUsernameIsInvalid] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSession({ ...session, [e.target.name]: e.target.value });
@@ -54,28 +57,50 @@ export function Login() {
             setToken(true);
             navigate('/transform');
         } else {
-            alert('Contraseña incorrecta');
+            setPasswordOrUsernameIsInvalid(true);
         }
     };
 
+    const [seePassword, setSeePassword] = useState(false);
+
     return (
         <FormLogin>
-            <h1>Login</h1>
-            <p>Ingrese su email y contraseña para iniciar sesión</p>
+            {passwordOrUsernameIsInvalid && (
+                <div className="password-or-username-is-invalid">
+                    <p>Password or username is incorrect</p>
+                    <button onClick={() => setPasswordOrUsernameIsInvalid(false)}>
+                        <XMarkIcon className="x-mark-icon" />
+                    </button>
+                </div>
+            )}
+            <div className="login-title">
+                <h1>Welcome back</h1>
+                <p>Please enter your details to continue</p>
+            </div>
             <InputText
-                label="Usuario"
+                label="Username"
                 name="username"
                 value={session.username}
                 onChange={handleChange}
+                placeholder="Enter your username"
             />
             <InputPassword
-                label="Contraseña"
+                setSeePassword={setSeePassword}
+                label="Password"
                 name="password"
                 value={session.password}
                 onChange={handleChange}
-                seePassword={false}
+                seePassword={seePassword}
+                placeholder="Enter your password"
             />
-            <PrimaryButton textButton="Iniciar sesión" onClick={handleSubmit} />
+            <div className="forgot-password">
+                <span>Forgot password?</span>
+            </div>
+            <PrimaryButton textButton="Login" onClick={handleSubmit} />
+            <div className="register">
+                <p>Don't have an account?</p>
+                <span>Register</span>
+            </div>
         </FormLogin>
     );
 }

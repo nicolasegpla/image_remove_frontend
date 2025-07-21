@@ -1,5 +1,6 @@
-import { PrimaryButton } from '@/presentation/components';
+import { ButtonLogOut, NavBar, PrimaryButton } from '@/presentation/components';
 import { PreviewImage, SelectImage } from '@/presentation/components/organisms';
+import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
 
 function Transform() {
     const urlFetchPost = `http://localhost:8000/test`;
@@ -11,11 +12,17 @@ function Transform() {
     };
 
     return (
-        <div>
-            <SelectImage />
-            <PreviewImage />
-            <PrimaryButton textButton="get" onClick={handleGet} />
-        </div>
+        <LayoutTransform>
+            <NavBar>
+                <h2 style={{ color: '#ffffff' }}>Logo</h2>
+                <ButtonLogOut onClick={() => {}} />
+            </NavBar>
+            <PrimaryContainerContentLayout>
+                <SelectImage />
+                <PreviewImage />
+            </PrimaryContainerContentLayout>
+            {/* <PrimaryButton textButton="get" onClick={handleGet} /> */}
+        </LayoutTransform>
     );
 }
 

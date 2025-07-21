@@ -1,5 +1,97 @@
 @import '@/presentation/styles/index.scss';
 
-.login {
-    // Estilos del componente
+.login-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    h1 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+.forgot-password {
+    width: 20rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #8f8f8f;
+        transition: all 0.3s ease;
+    }
+    &:hover {
+        span {
+            text-decoration: underline;
+            text-underline-offset: 0.2rem;
+            transition: all 0.3s ease;
+            color: #000000;
+        }
+    }
+}
+.register {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #000000;
+    }
+    span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #8f8f8f;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.2rem;
+            transition: all 0.3s ease;
+            color: #000000;
+        }
+    }
+}
+
+.password-or-username-is-invalid {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(255, 183, 183);
+    border: 1px solid #FF0000;
+    border-radius: 8px;
+    padding: 0 1rem;
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #FF0000;
+    }
+    button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .x-mark-icon {
+        width: 20px;
+        color: #FF0000;
+    }
 }
