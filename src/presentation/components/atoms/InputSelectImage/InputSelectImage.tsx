@@ -6,21 +6,28 @@ interface InputSelectImageProps {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     filename: string;
     errorFile: boolean;
+    handleClick?: () => void;
 }
 
-export function InputSelectImage({ onChange, filename, errorFile }: InputSelectImageProps) {
+export function InputSelectImage({
+    onChange,
+    filename,
+    errorFile,
+    handleClick,
+}: InputSelectImageProps) {
     return (
         <div className="input-select-image">
-            <div className="input-select-image__title">
+            {/*<div className="input-select-image__title">
                 <h2>Upload your image</h2>
                 <p>File should be an image (png, jpg, jpeg) to transform.</p>
-            </div>
+            </div>*/}
             <div className="drag-drop-relative">
                 {
                     <input
+                        onClick={handleClick ? handleClick : () => {}}
                         onChange={onChange}
                         type="file"
-                        accept=".png, .jpg, .jpeg"
+                        accept=".jpg, .jpeg"
                         name="image"
                         id="image"
                         className="file-input"
@@ -29,10 +36,10 @@ export function InputSelectImage({ onChange, filename, errorFile }: InputSelectI
                 <div className="input-drag-drop">
                     <FolderOpenIcon className="input-drag-drop__icon" />
                     <p>
-                        Choose your files here or <br /> drag and drop
+                        Choose your files here or drag and drop,{' '}
+                        {filename && <span>Archivo seleccionado: {filename}</span>}
                     </p>
                 </div>
-                {filename && <p className="p-selected-file">Archivo seleccionado: {filename}</p>}
                 {errorFile && (
                     <p className="p-selected-file">
                         El archivo supera las 20 MB, puedes comprimirlo en esta aplicación:

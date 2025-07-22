@@ -8,7 +8,7 @@ import './select-image.scss';
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 
 export function SelectImage() {
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const { selectedFile, setSelectedFile, setImageUrlOriginal } = useContext(GlobalContext);
     const [errorFile, setErrorFile] = useState(false);
     const [errorSizeFile, setErrorSizeFile] = useState(false);
     const { setImageUrl } = useImageSelectStore();
@@ -17,6 +17,7 @@ export function SelectImage() {
     const [isDisabled, setIsDisabled] = useState(true);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setImageUrlOriginal(null);
         const file = event.target.files?.[0];
         // Validar existencia
         if (!file) return;
@@ -35,46 +36,26 @@ export function SelectImage() {
         setErrorFile(false);
     };
 
-    const urlFetchPost = `http://localhost:8000/transform`;
-
-    const handleSubmit = async () => {
-        const allowedType = 'image/jpeg';
-
-        if (selectedFile?.type !== allowedType) {
-            console.warn(`El archivo "${selectedFile?.name}" no es una imagen JPEG válida.`);
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-
-        const response = await fetch(urlFetchPost, {
-            method: 'POST',
-            body: formData,
-        });
-
-        const blob = await response.blob(); // ✅ leer como imagen
-
-        const imageUrl = URL.createObjectURL(blob);
-
-        setImageUrl(imageUrl);
-        setUrlImageExistent(false);
-        setSelectedFile(null);
-        setIsDisabled(true);
+    const handleClick = () => {
+        console.log('handleClick');
+        setImageUrlOriginal(null);
+        setUrlImageExistent(true);
+        setImageUrl('');
     };
 
     return (
         <FormSelectImage>
             <InputSelectImage
+                handleClick={handleClick}
                 onChange={handleFileChange}
                 filename={selectedFile?.name || ''}
                 errorFile={errorFile}
             />
-            <PrimaryButton
+            {/*<PrimaryButton
                 textButton="Transform image"
                 onClick={handleSubmit}
                 disabled={isDisabled}
-            />
+            />*/}
         </FormSelectImage>
     );
 }

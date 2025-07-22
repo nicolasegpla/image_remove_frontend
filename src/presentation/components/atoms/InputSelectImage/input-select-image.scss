@@ -1,11 +1,11 @@
 @import '@/presentation/styles/index.scss';
 
 .input-select-image {
-    width: 30rem;
-    height: 32.5rem;
+    width: 100vw;
+    height: 150px;
     background-color: #fff;
     border-radius: 12px;
-    padding: 48px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -40,7 +40,7 @@
 
 .drag-drop-relative {
     width: 100%;
-    height: calc(100% - 5rem);
+    height: calc(100% );
     position: relative;
 }
 
@@ -57,7 +57,7 @@
 
 .input-drag-drop {
     width: 100%;
-    height: calc(100%);
+    height: 100%;
     border-radius: 12px;
     border: 1px dashed #BDBDBD;
     display: flex;

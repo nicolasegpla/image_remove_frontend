@@ -1,5 +1,5 @@
 import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
-import { FormSelectImage } from '@/presentation/components/molecules';
+import { FormPreview, FormSelectImage } from '@/presentation/components/molecules';
 import './preview-image.scss';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
@@ -12,6 +12,8 @@ export function PreviewImage() {
     const { setToken } = useTokenStore();
     const navigate = useNavigate();
     const { urlImageExistent } = useContext(GlobalContext);
+
+    console.log('urlImageExistent', urlImageExistent);
 
     const handleDownload = () => {
         const link = document.createElement('a');
@@ -27,17 +29,17 @@ export function PreviewImage() {
     };
 
     return (
-        <FormSelectImage>
+        <FormPreview>
             <div className="preview-image__title">
-                <h2>Preview image</h2>
-                <p>Here you can see the image you have uploaded.</p>
+                <h2>Preview image transformed</h2>
+                <p>Here you can see the image you have transformed.</p>
             </div>
             <PreviewTransform urlImage={imageUrl} />
             <PrimaryButton
                 textButton="Download Image"
-                onClick={handleDownload}
+                onClick={!urlImageExistent ? handleDownload : () => {}}
                 disabled={urlImageExistent}
             />
-        </FormSelectImage>
+        </FormPreview>
     );
 }

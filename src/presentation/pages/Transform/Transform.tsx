@@ -1,8 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ButtonLogOut, NavBar, PrimaryButton } from '@/presentation/components';
-import { PreviewImage, SelectImage } from '@/presentation/components/organisms';
+import {
+    PreviewImage,
+    PreviewImageOriginal,
+    SelectImage,
+} from '@/presentation/components/organisms';
 import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
-import { useNavigate } from 'react-router-dom';
 
 function Transform() {
     const urlFetchPost = `http://localhost:8000/test`;
@@ -29,9 +34,10 @@ function Transform() {
                 <ButtonLogOut onClick={handleLogOut} />
             </NavBar>
             <PrimaryContainerContentLayout>
-                <SelectImage />
+                <PreviewImageOriginal />
                 <PreviewImage />
             </PrimaryContainerContentLayout>
+            <SelectImage />
             {/* <PrimaryButton textButton="get" onClick={handleGet} /> */}
         </LayoutTransform>
     );
