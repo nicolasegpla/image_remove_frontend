@@ -1,12 +1,20 @@
-import { FormPreview } from '@/presentation/components/molecules';
-import './preview-image-original.scss';
-import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
-import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { useContext, useEffect, useState } from 'react';
+
 import { GlobalContext } from '@/store/context/global/GlobalContext';
+import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
+import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+import { FormPreview } from '@/presentation/components/molecules';
+import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob';
+import './preview-image-original.scss';
 
 export function PreviewImageOriginal() {
-    const { selectedFile, imageUrlOriginal, setImageUrlOriginal } = useContext(GlobalContext);
+    const {
+        selectedFile,
+        imageUrlOriginal,
+        setImageUrlOriginal,
+        setUrlImageExistent,
+        setSelectedFile,
+    } = useContext(GlobalContext);
 
     useEffect(() => {
         if (selectedFile) {
@@ -14,39 +22,42 @@ export function PreviewImageOriginal() {
         }
     }, [selectedFile]);
 
-    const [errorSizeFile, setErrorSizeFile] = useState(false);
-    const { setImageUrl } = useImageSelectStore();
-    const { setUrlImageExistent, setSelectedFile } = useContext(GlobalContext);
+    const { setImageUrl, imageUrl } = useImageSelectStore();
 
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [abortController, setAbortController] = useState<AbortController | null>(null);
 
-    const urlFetchPost = `http://localhost:8000/transform`;
+    console.log(abortController);
 
-    const handleSubmit = async () => {
-        const allowedType = 'image/jpeg';
-
-        if (selectedFile?.type !== allowedType) {
-            console.warn(`El archivo "${selectedFile?.name}" no es una imagen JPEG válida.`);
-            return;
+    const handleAbortRequest = () => {
+        if (abortController) {
+            abortController.abort();
+            setImageUrl('');
+            setImageUrlOriginal('');
+            setSelectedFile(null);
+            const controller = new AbortController();
+            setAbortController(controller);
         }
-
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-
-        const response = await fetch(urlFetchPost, {
-            method: 'POST',
-            body: formData,
-        });
-
-        const blob = await response.blob(); // ✅ leer como imagen
-
-        const imageUrl = URL.createObjectURL(blob);
-
-        setImageUrl(imageUrl);
-        setUrlImageExistent(false);
-        setSelectedFile(null);
-        setIsDisabled(true);
     };
+
+    const { loading, error, postBlobImage } = usePostBlobImage({
+        data: selectedFile,
+        setStateImageUrl: setImageUrl,
+        signalAbort: abortController?.signal,
+    });
+
+    useEffect(() => {
+        if (imageUrl) {
+            setUrlImageExistent(false);
+        }
+    }, [imageUrl]);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        setAbortController(controller);
+        return () => {
+            controller.abort();
+        };
+    }, []);
 
     return (
         <FormPreview>
@@ -59,10 +70,18 @@ export function PreviewImageOriginal() {
                 text="No image to show, please select an image."
             />
             <PrimaryButton
-                textButton="Transform Image"
-                onClick={imageUrlOriginal ? handleSubmit : () => {}}
+                textButton={loading ? 'Transforming...' : 'Transform Image'}
+                onClick={imageUrlOriginal ? (loading ? () => {} : () => postBlobImage()) : () => {}}
                 disabled={imageUrlOriginal ? false : true}
+                loading={loading}
             />
+            {loading && (
+                <PrimaryButton
+                    textButton="Abort Request"
+                    onClick={handleAbortRequest}
+                    disabled={false}
+                />
+            )}
         </FormPreview>
     );
 }

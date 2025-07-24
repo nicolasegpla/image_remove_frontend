@@ -1,19 +1,16 @@
-import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
-import { FormPreview, FormSelectImage } from '@/presentation/components/molecules';
-import './preview-image.scss';
-import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
-import { useTokenStore } from '@/store/zustand/useTokenstore';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+
 import { GlobalContext } from '@/store/context/global/GlobalContext';
+import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
+import { FormPreview } from '@/presentation/components/molecules';
+import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+
+import './preview-image.scss';
 
 export function PreviewImage() {
-    const { imageUrl } = useImageSelectStore();
-    const { setToken } = useTokenStore();
-    const navigate = useNavigate();
-    const { urlImageExistent } = useContext(GlobalContext);
-
-    console.log('urlImageExistent', urlImageExistent);
+    const { imageUrl, setImageUrl } = useImageSelectStore();
+    const { setUrlImageExistent, urlImageExistent, setImageUrlOriginal, setSelectedFile } =
+        useContext(GlobalContext);
 
     const handleDownload = () => {
         const link = document.createElement('a');
@@ -22,10 +19,11 @@ export function PreviewImage() {
         link.click();
     };
 
-    const handleLogOut = () => {
-        sessionStorage.removeItem('session');
-        setToken(false);
-        navigate('/login');
+    const handleCleanTransform = () => {
+        setImageUrl('');
+        setImageUrlOriginal(null);
+        setSelectedFile(null);
+        setUrlImageExistent(true);
     };
 
     return (
@@ -40,6 +38,13 @@ export function PreviewImage() {
                 onClick={!urlImageExistent ? handleDownload : () => {}}
                 disabled={urlImageExistent}
             />
+            {!urlImageExistent && (
+                <PrimaryButton
+                    textButton="Clean transform"
+                    onClick={handleCleanTransform}
+                    disabled={false}
+                />
+            )}
         </FormPreview>
     );
 }
