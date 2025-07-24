@@ -54,7 +54,7 @@ export function Login() {
         const username = new Username(session.username, session.password);
         if (username.validate()) {
             sessionStorage.setItem('session', JSON.stringify({ token }));
-            setToken(true);
+            setToken(token);
             navigate('/transform');
         } else {
             setPasswordOrUsernameIsInvalid(true);

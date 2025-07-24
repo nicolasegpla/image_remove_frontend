@@ -30,7 +30,7 @@ function Transform() {
     return (
         <LayoutTransform>
             <NavBar>
-                <h2 style={{ color: '#ffffff' }}>Logo</h2>
+                <h2 style={{ color: '#ffffff' }}>Image Transform</h2>
                 <ButtonLogOut onClick={handleLogOut} />
             </NavBar>
             <PrimaryContainerContentLayout>
@@ -38,7 +38,6 @@ function Transform() {
                 <PreviewImage />
             </PrimaryContainerContentLayout>
             <SelectImage />
-            {/* <PrimaryButton textButton="get" onClick={handleGet} /> */}
         </LayoutTransform>
     );
 }

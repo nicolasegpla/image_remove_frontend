@@ -1,9 +1,38 @@
+@font-face {
+    font-family: 'AvenirLTStd';
+    src: url('/src/assets/fonts/avenir/AvenirLTStd-Book.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'AvenirLTStd';
+    src: url('/src/assets/fonts/avenir/AvenirLTStd-Heavy.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'AvenirLTStd';
+    src: url('/src/assets/fonts/avenir/AvenirLTStd-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'AvenirLTStd', sans-serif;
 }
 
 body {
     background-color: #000000;
+    font-family: 'AvenirLTStd', sans-serif;
+}
+
+html {
+    font-family: 'AvenirLTStd', sans-serif; 
+    font-size: 16px;
 }
