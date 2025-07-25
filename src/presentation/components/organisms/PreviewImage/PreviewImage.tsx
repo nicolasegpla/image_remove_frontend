@@ -19,6 +19,14 @@ export function PreviewImage() {
         link.click();
     };
 
+    const handleDownloadWithGoogleAnalytics = () => {
+        window.gtag('event', 'click_boton_descargar', {
+            event_category: 'interacción',
+            event_label: 'descargar imagen',
+        });
+        handleDownload();
+    };
+
     const handleCleanTransform = () => {
         setImageUrl('');
         setImageUrlOriginal(null);
@@ -35,7 +43,7 @@ export function PreviewImage() {
             <PreviewTransform urlImage={imageUrl} />
             <PrimaryButton
                 textButton="Download Image"
-                onClick={!urlImageExistent ? handleDownload : () => {}}
+                onClick={!urlImageExistent ? handleDownloadWithGoogleAnalytics : () => {}}
                 disabled={urlImageExistent}
             />
             {!urlImageExistent && (

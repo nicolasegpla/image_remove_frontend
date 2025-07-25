@@ -51,6 +51,14 @@ export function PreviewImageOriginal() {
         }
     }, [imageUrl]);
 
+    const handlePostBlobImageWithGoogleAnalytics = () => {
+        window.gtag('event', 'click_boton_transformar', {
+            event_category: 'interacción',
+            event_label: 'transformar imagen',
+        });
+        postBlobImage();
+    };
+
     useEffect(() => {
         const controller = new AbortController();
         setAbortController(controller);
@@ -71,7 +79,13 @@ export function PreviewImageOriginal() {
             />
             <PrimaryButton
                 textButton={loading ? 'Transforming...' : 'Transform Image'}
-                onClick={imageUrlOriginal ? (loading ? () => {} : () => postBlobImage()) : () => {}}
+                onClick={
+                    imageUrlOriginal
+                        ? loading
+                            ? () => {}
+                            : () => handlePostBlobImageWithGoogleAnalytics()
+                        : () => {}
+                }
                 disabled={imageUrlOriginal ? false : true}
                 loading={loading}
             />
