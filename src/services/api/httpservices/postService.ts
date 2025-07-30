@@ -4,9 +4,10 @@ import { urlFetchPost } from '@/constants';
 interface PostServiceProps {
     signalAbort?: AbortSignal;
     data: File | null;
+    url: string;
 }
 
-const postService = async ({ signalAbort, data }: PostServiceProps) => {
+const postService = async ({ signalAbort, data, url }: PostServiceProps) => {
     try {
         if (!(data instanceof File)) {
             throw new Error('El valor recibido no es un archivo válido.');
@@ -17,7 +18,7 @@ const postService = async ({ signalAbort, data }: PostServiceProps) => {
         }
         const formData = new FormData();
         formData.append('file', data);
-        const response = await fetch(urlFetchPost, {
+        const response = await fetch(url, {
             method: 'POST',
             body: formData,
             signal: signalAbort,

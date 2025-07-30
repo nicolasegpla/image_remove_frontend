@@ -5,11 +5,16 @@ import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { ButtonMini, PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
 import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
 import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob';
+import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 
 import './preview-image-original.scss';
 import { StopCircleIcon, StopIcon } from '@heroicons/react/24/outline';
 
+import { urlFetchPost, urlFetchPoststudio, urlFetchPostultra } from '@/constants';
+
 export function PreviewImageOriginal() {
+    const { typeModel } = useTypeModelStore();
+
     const {
         selectedFile,
         imageUrlOriginal,
@@ -45,6 +50,12 @@ export function PreviewImageOriginal() {
         data: selectedFile,
         setStateImageUrl: setImageUrl,
         signalAbort: abortController?.signal,
+        url:
+            typeModel === 'express'
+                ? urlFetchPost
+                : typeModel === 'studio'
+                  ? urlFetchPoststudio
+                  : urlFetchPostultra,
     });
 
     useEffect(() => {

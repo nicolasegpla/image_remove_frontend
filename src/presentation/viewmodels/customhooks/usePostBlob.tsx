@@ -6,16 +6,17 @@ interface UsePostBlobImageProps {
     data: File | null;
     setStateImageUrl: (imageUrl: string) => void;
     signalAbort?: AbortSignal;
+    url: string;
 }
 
-const usePostBlobImage = ({ data, setStateImageUrl, signalAbort }: UsePostBlobImageProps) => {
+const usePostBlobImage = ({ data, setStateImageUrl, signalAbort, url }: UsePostBlobImageProps) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
     const postBlobImage = async () => {
         setLoading(true);
         try {
-            const response = await postService({ data, signalAbort });
+            const response = await postService({ data, signalAbort, url });
             setStateImageUrl(response);
         } catch (error) {
             setError(true);
