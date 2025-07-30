@@ -4,3 +4,6 @@ export * from './PreviewTransform/PreviewTransform';
 export * from './InputText/InputText';
 export * from './InputPassword/InputPassword';
 export * from './ButtonLogOut/ButtonLogOut';
+export * from './ButtonMini/ButtonMini';
+export * from './SwitchComponent/SwitchComponent';
+export * from './ContainerLogo/ContainerLogo';

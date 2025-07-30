@@ -1,0 +1,18 @@
+@import '@/presentation/styles/index.scss';
+
+.button-mini {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: none;
+    background-color: #979797;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        background-color: red;
+        color: #ffffff;
+    }
+}

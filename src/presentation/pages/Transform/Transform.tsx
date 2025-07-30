@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ButtonLogOut, NavBar, PrimaryButton } from '@/presentation/components';
+import { ButtonLogOut, ContainerLogo, NavBar, SwitchComponent } from '@/presentation/components';
 import {
     PreviewImage,
     PreviewImageOriginal,
@@ -8,6 +8,7 @@ import {
 } from '@/presentation/components/organisms';
 import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
+import { useState } from 'react';
 
 function Transform() {
     const urlFetchPost = `http://localhost:8000/test`;
@@ -27,10 +28,13 @@ function Transform() {
         navigate('/login');
     };
 
+    const [isActive, setIsActive] = useState(false);
+
     return (
         <LayoutTransform>
+            <ContainerLogo />
             <NavBar>
-                <h2 style={{ color: '#ffffff' }}>Image Transform</h2>
+                <SwitchComponent onClick={() => setIsActive(!isActive)} ProisActive={isActive} />
                 <ButtonLogOut onClick={handleLogOut} />
             </NavBar>
             <PrimaryContainerContentLayout>

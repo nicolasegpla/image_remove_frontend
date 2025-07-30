@@ -1,12 +1,14 @@
 @import '@/presentation/styles/index.scss';
 
 .form-select-image {
-    width: 100%;
-    height: 150px;
-    padding: 1.5rem;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    padding: 1rem;
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
 }

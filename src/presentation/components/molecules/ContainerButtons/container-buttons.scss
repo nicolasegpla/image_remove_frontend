@@ -1,17 +1,10 @@
 @import '@/presentation/styles/index.scss';
 
-.nav-bar {
+.container-buttons {
     width: auto;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 1rem;
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    right: 0;
-    z-index: 100;
 }

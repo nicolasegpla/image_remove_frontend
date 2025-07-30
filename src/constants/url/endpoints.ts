@@ -1,1 +1,1 @@
-export const urlFetchPost = `http://localhost:8000/transform`;
+export const urlFetchPost = `https://buildtix.store/transform`;

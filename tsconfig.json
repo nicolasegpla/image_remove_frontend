@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "noEmit": true,
         "types": ["bun-types"],
         "target": "ESNext",
         "module": "ESNext",

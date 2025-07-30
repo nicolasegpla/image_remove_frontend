@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
-import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
-import { FormPreview } from '@/presentation/components/molecules';
+import { ButtonMini, PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
 import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob';
+
 import './preview-image-original.scss';
+import { StopCircleIcon, StopIcon } from '@heroicons/react/24/outline';
 
 export function PreviewImageOriginal() {
     const {
@@ -69,33 +71,31 @@ export function PreviewImageOriginal() {
 
     return (
         <FormPreview>
-            <div className="preview-image__title">
-                <h2>Preview image original</h2>
-                <p>Here you can see the image you have selected.</p>
-            </div>
             <PreviewTransform
                 urlImage={imageUrlOriginal || ''}
                 text="No image to show, please select an image."
+                title="Preview image original"
+                description="Here you can see the image you have selected."
             />
-            <PrimaryButton
-                textButton={loading ? 'Transforming...' : 'Transform Image'}
-                onClick={
-                    imageUrlOriginal
-                        ? loading
-                            ? () => {}
-                            : () => handlePostBlobImageWithGoogleAnalytics()
-                        : () => {}
-                }
-                disabled={imageUrlOriginal ? false : true}
-                loading={loading}
-            />
-            {loading && (
+            <ContainerButtons>
                 <PrimaryButton
-                    textButton="Abort Request"
-                    onClick={handleAbortRequest}
-                    disabled={false}
+                    textButton={loading ? 'Transforming...' : 'Transform'}
+                    onClick={
+                        imageUrlOriginal
+                            ? loading
+                                ? () => {}
+                                : () => handlePostBlobImageWithGoogleAnalytics()
+                            : () => {}
+                    }
+                    disabled={imageUrlOriginal ? false : true}
+                    loading={loading}
                 />
-            )}
+                {loading && (
+                    <ButtonMini onClick={handleAbortRequest}>
+                        <StopCircleIcon className="button-mini__icon" />
+                    </ButtonMini>
+                )}
+            </ContainerButtons>
         </FormPreview>
     );
 }

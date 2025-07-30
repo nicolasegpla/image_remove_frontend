@@ -1,0 +1,19 @@
+@import '@/presentation/styles/index.scss';
+
+.container-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 1rem 1rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    &__text {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #000000;
+    }
+}

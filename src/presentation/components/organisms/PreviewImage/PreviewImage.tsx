@@ -2,10 +2,11 @@ import { useContext } from 'react';
 
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
-import { FormPreview } from '@/presentation/components/molecules';
-import { PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
+import { ButtonMini, PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
 
 import './preview-image.scss';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 export function PreviewImage() {
     const { imageUrl, setImageUrl } = useImageSelectStore();
@@ -36,23 +37,23 @@ export function PreviewImage() {
 
     return (
         <FormPreview>
-            <div className="preview-image__title">
-                <h2>Preview image transformed</h2>
-                <p>Here you can see the image you have transformed.</p>
-            </div>
-            <PreviewTransform urlImage={imageUrl} />
-            <PrimaryButton
-                textButton="Download Image"
-                onClick={!urlImageExistent ? handleDownloadWithGoogleAnalytics : () => {}}
-                disabled={urlImageExistent}
+            <PreviewTransform
+                urlImage={imageUrl}
+                title="Preview image transformed"
+                description="Here you can see the image you have transformed."
             />
-            {!urlImageExistent && (
+            <ContainerButtons>
                 <PrimaryButton
-                    textButton="Clean transform"
-                    onClick={handleCleanTransform}
-                    disabled={false}
+                    textButton="Download"
+                    onClick={!urlImageExistent ? handleDownloadWithGoogleAnalytics : () => {}}
+                    disabled={urlImageExistent}
                 />
-            )}
+                {!urlImageExistent && (
+                    <ButtonMini onClick={handleCleanTransform}>
+                        <TrashIcon className="button-mini__icon-trash" />
+                    </ButtonMini>
+                )}
+            </ContainerButtons>
         </FormPreview>
     );
 }
