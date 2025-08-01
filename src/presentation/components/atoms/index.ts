@@ -8,3 +8,4 @@ export * from './ButtonMini/ButtonMini';
 export * from './SwitchComponent/SwitchComponent';
 export * from './ContainerLogo/ContainerLogo';
 export * from './PickList/PickList';
+export * from './Infobutton/Infobutton';

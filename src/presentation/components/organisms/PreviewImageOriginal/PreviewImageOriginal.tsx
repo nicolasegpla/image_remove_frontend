@@ -10,7 +10,12 @@ import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 import './preview-image-original.scss';
 import { StopCircleIcon, StopIcon } from '@heroicons/react/24/outline';
 
-import { urlFetchPost, urlFetchPoststudio, urlFetchPostultra } from '@/constants';
+import {
+    urlFetchPost,
+    urlFetchPoststudio,
+    urlFetchPostultra,
+    urlFetchPostExterna,
+} from '@/constants';
 
 export function PreviewImageOriginal() {
     const { typeModel } = useTypeModelStore();
@@ -55,7 +60,9 @@ export function PreviewImageOriginal() {
                 ? urlFetchPost
                 : typeModel === 'studio'
                   ? urlFetchPoststudio
-                  : urlFetchPostultra,
+                  : typeModel === 'ultra'
+                    ? urlFetchPostultra
+                    : urlFetchPostExterna,
     });
 
     useEffect(() => {

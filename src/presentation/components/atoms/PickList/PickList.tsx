@@ -7,9 +7,10 @@ interface PickListProps {
 export function PickList({ onChange }: PickListProps) {
     return (
         <select className="pick-list" onChange={(e) => onChange(e.target.value)}>
-            <option value="express">Modelo Express</option>
-            <option value="studio">Modelo Studio</option>
-            <option value="ultra">Modelo Ultra</option>
+            <option value="express">ClearCut</option>
+            <option value="studio">HumanPro</option>
+            <option value="ultra">SmartEdge</option>
+            <option value="external">UltraClean</option>
         </select>
     );
 }
