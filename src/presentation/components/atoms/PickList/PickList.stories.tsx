@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PickList } from './PickList';
 
 const meta: Meta<typeof PickList> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/atoms/PickList',
+    title: 'presentation/components/atoms/PickList',
     component: PickList,
     tags: ['autodocs'],
 };

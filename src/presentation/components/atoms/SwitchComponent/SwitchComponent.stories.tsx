@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SwitchComponent } from './SwitchComponent';
 
 const meta: Meta<typeof SwitchComponent> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/atoms/switchComponent',
+    title: 'presentation/components/atoms/SwitchComponent',
     component: SwitchComponent,
     tags: ['autodocs'],
 };

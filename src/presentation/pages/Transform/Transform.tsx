@@ -1,25 +1,30 @@
 import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
-import { ButtonLogOut, ContainerLogo, NavBar, SwitchComponent } from '@/presentation/components';
 import {
+    ButtonLogOut,
+    ButtonMiniMenu,
+    CollapsibleMenu,
+    ContainerLogo,
+    Infobutton,
+    Modal,
+    NavBar,
+    SwitchComponent,
+} from '@/presentation/components';
+import {
+    Information,
     PreviewImage,
     PreviewImageOriginal,
     SelectImage,
 } from '@/presentation/components/organisms';
 import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
-import { useState } from 'react';
 import { PickList } from '@/presentation/components/atoms/PickList/PickList';
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
+import { GlobalContext } from '@/store/context/global/GlobalContext';
 
 function Transform() {
-    const urlFetchPost = `http://localhost:8000/test`;
-
-    const handleGet = async () => {
-        const response = await fetch(urlFetchPost);
-        const data = await response.json();
-        console.log(data);
-    };
+    const { modal, setModal, collapsibleMenu, setCollapsibleMenu } = useContext(GlobalContext);
 
     const { setToken } = useTokenStore();
     const navigate = useNavigate();
@@ -30,24 +35,60 @@ function Transform() {
         navigate('/login');
     };
 
-    const { typeModel, setTypeModel } = useTypeModelStore();
+    const { setTypeModel } = useTypeModelStore();
 
     const handleChangeTypeModel = (value: string) => {
         setTypeModel(value);
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        const collapsibleMenuElement = document.querySelector('.collapsible-menu');
+        const buttonMiniMenu = document.querySelector('.button-mini-menu');
+
+        if (
+            collapsibleMenuElement &&
+            buttonMiniMenu &&
+            !collapsibleMenuElement.contains(event.target as Node) &&
+            !buttonMiniMenu.contains(event.target as Node) &&
+            collapsibleMenu
+        ) {
+            setCollapsibleMenu(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [collapsibleMenu]);
+
+    useEffect(() => {
+        return () => {
+            setCollapsibleMenu(false);
+        };
+    }, []);
 
     return (
         <LayoutTransform>
             <ContainerLogo />
             <NavBar>
                 <PickList onChange={handleChangeTypeModel} />
-                <ButtonLogOut onClick={handleLogOut} />
+                {/*<ButtonLogOut onClick={handleLogOut} />*/}
+                <ButtonMiniMenu onClick={() => setCollapsibleMenu(!collapsibleMenu)} />
+                {collapsibleMenu && <CollapsibleMenu onClick={handleLogOut} />}
             </NavBar>
             <PrimaryContainerContentLayout>
                 <PreviewImageOriginal />
                 <PreviewImage />
             </PrimaryContainerContentLayout>
             <SelectImage />
+            <Infobutton onClick={() => setModal(true)} />
+            {modal && (
+                <Modal>
+                    <Information />
+                </Modal>
+            )}
         </LayoutTransform>
     );
 }

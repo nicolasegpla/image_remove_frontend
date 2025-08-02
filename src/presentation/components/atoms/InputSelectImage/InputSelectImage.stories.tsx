@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { InputSelectImage } from './InputSelectImage';
 
 const meta: Meta<typeof InputSelectImage> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/atoms/InputSelectImage',
+    title: 'presentation/components/atoms/InputSelectImage',
     component: InputSelectImage,
     tags: ['autodocs'],
 };

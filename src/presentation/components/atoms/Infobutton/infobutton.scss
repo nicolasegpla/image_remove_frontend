@@ -1,5 +1,26 @@
 @import '@/presentation/styles/index.scss';
 
 .infobutton {
-    // Estilos del componente
+    position: absolute;
+    bottom: 3rem;
+    right: 2rem;
+    width: 72px;
+    height: 72px;
+    background-color: #fff;
+    border: none;
+    border-radius: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+    -webkit-box-shadow: 8px 8px 29px -17px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 29px -17px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 29px -17px rgba(66, 68, 90, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &__icon {
+        width: 40px;
+        height: 40px;
+    }
 }

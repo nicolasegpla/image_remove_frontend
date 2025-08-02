@@ -1,0 +1,15 @@
+@import '@/presentation/styles/index.scss';
+
+.container-info {
+    position: relative;
+    width: 90vw;
+    height: auto;
+    max-height: 95dvh;
+    padding: 4rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+    gap: 1.5rem; /* espacio entre las cards */
+    justify-content: end;
+}

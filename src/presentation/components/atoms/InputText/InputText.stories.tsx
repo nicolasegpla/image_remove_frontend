@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { InputText } from './InputText';
 
 const meta: Meta<typeof InputText> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/atoms/InputText',
+    title: 'presentation/components/atoms/InputText',
     component: InputText,
     tags: ['autodocs'],
 };

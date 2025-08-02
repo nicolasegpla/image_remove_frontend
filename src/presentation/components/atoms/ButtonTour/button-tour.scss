@@ -1,0 +1,24 @@
+@import '@/presentation/styles/index.scss';
+
+.button-tour {
+    width: 260px;
+    height: 2.5rem;
+    background-color: #000000;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    grid-column: 2 / 3;
+    p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #ffffff;
+    }
+    .button-tour__icon {
+        width: 24px;
+        color: #ffffff;
+    }
+}

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FormPreview } from './FormPreview';
 
 const meta: Meta<typeof FormPreview> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/molecules/FormPreview',
+    title: 'presentation/components/molecules/FormPreview',
     component: FormPreview,
     tags: ['autodocs'],
 };

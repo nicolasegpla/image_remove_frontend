@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SelectImage } from './SelectImage';
 
 const meta: Meta<typeof SelectImage> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/organisms/SelectImage',
+    title: 'presentation/components/organisms/SelectImage',
     component: SelectImage,
     tags: ['autodocs'],
 };

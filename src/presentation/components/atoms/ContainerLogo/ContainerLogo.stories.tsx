@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ContainerLogo } from './ContainerLogo';
 
 const meta: Meta<typeof ContainerLogo> = {
-    title: '/home/nicolasgpla/image_remove_frontend/src/presentation/components/atoms/ContainerLogo',
+    title: 'presentation/components/atoms/ContainerLogo',
     component: ContainerLogo,
     tags: ['autodocs'],
 };

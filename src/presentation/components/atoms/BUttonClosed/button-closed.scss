@@ -1,0 +1,17 @@
+@import '@/presentation/styles/index.scss';
+
+.button-closed {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    &__icon {
+        width: 1.5rem;
+        color: #000;
+    }
+}

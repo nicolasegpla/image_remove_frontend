@@ -1,0 +1,19 @@
+@import '@/presentation/styles/index.scss';
+
+.button-mini-menu {
+    width: 72px;
+    height: 42px;
+    background-color: #fff;
+    border: none;
+    border-radius: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &__icon {
+        width: 28px;
+    }
+}

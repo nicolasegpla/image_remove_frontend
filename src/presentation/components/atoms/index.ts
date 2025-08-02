@@ -9,3 +9,8 @@ export * from './SwitchComponent/SwitchComponent';
 export * from './ContainerLogo/ContainerLogo';
 export * from './PickList/PickList';
 export * from './Infobutton/Infobutton';
+export * from './Modal/Modal';
+export * from './BUttonClosed/BUttonClosed';
+export * from './ButtonTour/ButtonTour';
+export * from './ButtonMiniMenu/ButtonMiniMenu';
+export * from './CollapsibleMenu/CollapsibleMenu';

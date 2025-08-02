@@ -1,13 +1,14 @@
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import './infobutton.scss';
 
 interface InfobuttonProps {
-    // Agregá tus props acá
+    onClick: () => void;
 }
 
-export function Infobutton({}: InfobuttonProps) {
+export function Infobutton({ onClick }: InfobuttonProps) {
     return (
-        <div className="infobutton">
-            <h2>Infobutton works!</h2>
-        </div>
+        <button className="infobutton" onClick={onClick}>
+            <InformationCircleIcon className="infobutton__icon" />
+        </button>
     );
 }
