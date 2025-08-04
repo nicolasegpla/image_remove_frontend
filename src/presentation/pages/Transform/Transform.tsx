@@ -7,6 +7,7 @@ import {
     CollapsibleMenu,
     ContainerLogo,
     Infobutton,
+    LogoImage,
     Modal,
     NavBar,
     SwitchComponent,
@@ -71,7 +72,9 @@ function Transform() {
 
     return (
         <LayoutTransform>
-            <ContainerLogo />
+            <ContainerLogo>
+                <LogoImage />
+            </ContainerLogo>
             <NavBar>
                 <PickList onChange={handleChangeTypeModel} />
                 {/*<ButtonLogOut onClick={handleLogOut} />*/}

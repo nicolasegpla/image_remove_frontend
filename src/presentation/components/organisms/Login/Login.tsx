@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { PrimaryButton } from '@/presentation/components/atoms';
+import { LogoImage, PrimaryButton } from '@/presentation/components/atoms';
 import { InputPassword, InputText } from '@/presentation/components/atoms';
 import { FormLogin } from '@/presentation/components/molecules';
 
@@ -65,6 +65,7 @@ export function Login() {
 
     return (
         <FormLogin>
+            <LogoImage />
             {passwordOrUsernameIsInvalid && (
                 <div className="password-or-username-is-invalid">
                     <p>Password or username is incorrect</p>
@@ -74,7 +75,7 @@ export function Login() {
                 </div>
             )}
             <div className="login-title">
-                <h1>Welcome back</h1>
+                <h2>Welcome back</h2>
                 <p>Please enter your details to continue</p>
             </div>
             <InputText

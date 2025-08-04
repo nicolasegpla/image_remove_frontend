@@ -1,9 +1,10 @@
+import React from 'react';
 import './card-model-infor.scss';
 
 interface CardModelInforProps {
     title: string;
     description: string;
-    image: string;
+    image: React.ReactNode; // Changed to React.ReactNode to allow for icons or other components
     list: string[];
     subTitle: string;
     subTitleDescription: string;
@@ -20,7 +21,7 @@ export function CardModelInfor({
     return (
         <div className="card-model-infor">
             <div className="card-model-infor__header">
-                <p className="card-model-infor__header__image">{image}</p>
+                <div className="card-model-infor__header__image">{image}</div>
                 <h2 className="card-model-infor__header__title">{title}</h2>
             </div>
             <div className="card-model-infor__body">

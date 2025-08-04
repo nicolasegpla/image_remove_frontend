@@ -1,13 +1,21 @@
 @import '@/presentation/styles/index.scss';
 
 .pick-list {
-    width: 120px;
+    width: 140px;
     height: 100%;
     background-color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    font-size: 16px;
+    font-size: 20px;
     color: #000;
-    
+    appearance: none; // Oculta la flecha por defecto
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' viewBox='0 0 24 24' width='20' height='20' xmlns='http://www.w3.org/2000/svg'><path d='M8.59 10.59L12 14l3.41-3.41L17 12l-5 5-5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0px center;
+    background-size: 20px 20px;
 }
+

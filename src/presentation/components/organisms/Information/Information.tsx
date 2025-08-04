@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { BUttonClosed, ButtonTour, PrimaryButton } from '@/presentation/components/atoms';
 import { CardModelInfor, ContainerInfo } from '@/presentation/components/molecules';
 import { GlobalContext } from '@/store/context/global/GlobalContext';
+import { BoltIcon, SparklesIcon, UserIcon } from '@heroicons/react/24/solid';
 
 import './information.scss';
 interface InformationProps {
@@ -16,7 +17,7 @@ export function Information({}: InformationProps) {
         constructor(
             public title: string,
             public description: string,
-            public image: string,
+            public image: React.ReactNode,
             public list: string[],
             public subTitle: string,
             public subTitleDescription: string
@@ -34,7 +35,7 @@ export function Information({}: InformationProps) {
         new TypeModelInformation(
             'ClearCut',
             'Cuando necesitas resultados confiables para humanos o animales, sin requerir máxima precisión.',
-            '⚡',
+            <BoltIcon className="icon-information" />,
             [
                 'Ideal para personas y mascotas en fondos variados.',
                 'Buen equilibrio entre calidad, precisión y velocidad.',
@@ -46,7 +47,7 @@ export function Information({}: InformationProps) {
         new TypeModelInformation(
             'HumanPro',
             'Cuando el enfoque principal es una persona o un grupo de personas.',
-            '👤',
+            <UserIcon className="icon-information" />,
             [
                 'Entrenado especialmente para personas: rostros, cabello, ropa.',
                 'Alta precisión en retratos y siluetas humanas.',
@@ -57,22 +58,9 @@ export function Information({}: InformationProps) {
         ),
 
         new TypeModelInformation(
-            'SmartEdge',
-            'Cuando necesitas rapidez y el fondo es sencillo o bien definido.',
-            '⚙️',
-            [
-                'Recorte ágil para humanos y animales en fondos simples o contrastados.',
-                'Ideal para procesamiento masivo o en tiempo real.',
-                'Recomendado cuando no hay mucha complejidad visual.',
-            ],
-            'Ligero y rápido',
-            'Cuándo usarlo:'
-        ),
-
-        new TypeModelInformation(
             'UltraClean',
             'Cuando necesitas un recorte de alta precisión en personas o animales con detalles finos.',
-            '💎',
+            <SparklesIcon className="icon-information" />,
             [
                 'Recortes detallados con excelente definición de bordes.',
                 'Ideal para fotografías complejas o con fondos difíciles.',

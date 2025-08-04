@@ -1,4 +1,5 @@
 import { FolderOpenIcon, PhoneIcon, PhotoIcon } from '@heroicons/react/24/outline';
+import { CloudArrowUpIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 import './input-select-image.scss';
 
@@ -39,7 +40,7 @@ export function InputSelectImage({
                         {/*Choose your files here or drag and drop,{' '}
                         {filename && <span>Archivo seleccionado: {filename}</span>}}*/}
                         {/*Choose your files here or drag and drop*/}
-                        <PhotoIcon className="input-drag-drop__icon" />
+                        <CloudArrowUpIcon className="input-drag-drop__icon" />
                     </p>
                 </div>
                 {errorFile && (
