@@ -1,32 +1,31 @@
-import { adaptBlobToUrl, jpegOnlyInterceptor } from '@/utils';
-import { urlFetchPost } from '@/constants';
+import { dataTypeInterceptor } from '@/utils';
 
 interface PostServiceProps {
     signalAbort?: AbortSignal;
-    data: File | null;
+    data: object | null;
     url: string;
-    token?: string; // Optional token for authorization
 }
 
-const postService = async ({ signalAbort, data, url, token }: PostServiceProps) => {
+const postServiceLogin = async ({ signalAbort, data, url }: PostServiceProps) => {
     try {
-        if (!(data instanceof File)) {
+        if (!(data instanceof Object) || data === null) {
             throw new Error('El valor recibido no es un archivo válido.');
         }
-        const isValid = jpegOnlyInterceptor(data);
+        const isValid = dataTypeInterceptor(data);
         if (!isValid) {
-            throw new Error('📸 Formato de archivo no permitido. Solo JPEG.');
+            throw new Error('📸 Formato de archivo no permitido. Solo recibe objetos');
         }
-        const formData = new FormData();
-        formData.append('file', data);
         const response = await fetch(url, {
             method: 'POST',
-            body: formData,
-            signal: signalAbort,
             headers: {
-                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify(data),
+            signal: signalAbort,
         });
+
+        const responseText = await response.text();
+        console.log('Raw response text:', responseText);
 
         if (!response.ok) {
             switch (response.status) {
@@ -44,9 +43,14 @@ const postService = async ({ signalAbort, data, url, token }: PostServiceProps) 
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
         }
-        const blob = await response.blob();
-        const imageUrl = adaptBlobToUrl(blob);
-        return imageUrl;
+
+        try {
+            return JSON.parse(responseText);
+        } catch (parseError) {
+            console.error('Failed to parse response as JSON:', parseError);
+            console.error('Response text was:', responseText);
+            throw new Error('Invalid JSON response from server');
+        }
     } catch (error: unknown) {
         if (error instanceof DOMException && error.name === 'AbortError') {
             throw new DOMException('Petición abortada', 'AbortError');
@@ -58,4 +62,4 @@ const postService = async ({ signalAbort, data, url, token }: PostServiceProps) 
     }
 };
 
-export default postService;
+export default postServiceLogin;

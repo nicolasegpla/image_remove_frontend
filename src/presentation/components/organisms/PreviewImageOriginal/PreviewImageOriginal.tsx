@@ -16,6 +16,7 @@ import {
     urlFetchPostultra,
     urlFetchPostExterna,
 } from '@/constants';
+import { useTokenStore } from '@/store/zustand/useTokenstore';
 
 export function PreviewImageOriginal() {
     const { typeModel } = useTypeModelStore();
@@ -35,6 +36,7 @@ export function PreviewImageOriginal() {
     }, [selectedFile]);
 
     const { setImageUrl, imageUrl } = useImageSelectStore();
+    const { token } = useTokenStore();
 
     const [abortController, setAbortController] = useState<AbortController | null>(null);
 
@@ -51,6 +53,8 @@ export function PreviewImageOriginal() {
         }
     };
 
+    console.log('Token in PreviewImageOriginal:', token);
+
     const { loading, error, postBlobImage } = usePostBlobImage({
         data: selectedFile,
         setStateImageUrl: setImageUrl,
@@ -63,6 +67,7 @@ export function PreviewImageOriginal() {
                   : typeModel === 'ultra'
                     ? urlFetchPostultra
                     : urlFetchPostExterna,
+        token: token || undefined, // Pass the token if available
     });
 
     useEffect(() => {

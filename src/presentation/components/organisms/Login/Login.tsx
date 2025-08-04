@@ -6,14 +6,20 @@ import { FormLogin } from '@/presentation/components/molecules';
 
 import './login.scss';
 import { Navigate, useNavigate } from 'react-router-dom';
+
 import { useTokenStore } from '@/store/zustand/useTokenstore';
+import { useUserstore } from '@/store/zustand/useUserstore';
+
 import { XMarkIcon } from '@heroicons/react/24/outline';
+
+import { usePost } from '@/presentation/viewmodels/customhooks/usePost';
 
 export function Login() {
     const navigate = useNavigate();
     const { setToken } = useTokenStore();
+    const { setUser } = useUserstore();
     const [session, setSession] = useState({
-        username: '',
+        email: '',
         password: '',
     });
 
@@ -33,9 +39,7 @@ export function Login() {
         }
 
         validate() {
-            const username = listUsernames.find(
-                (username) => username.username === session.username
-            );
+            const username = listUsernames.find((username) => username.username === session.email);
             if (username) {
                 return username.password === session.password;
             }
@@ -51,7 +55,7 @@ export function Login() {
     const token = '1234567890';
 
     const handleSubmit = () => {
-        const username = new Username(session.username, session.password);
+        const username = new Username(session.email, session.password);
         if (username.validate()) {
             sessionStorage.setItem('session', JSON.stringify({ token }));
             setToken(token);
@@ -62,6 +66,24 @@ export function Login() {
     };
 
     const [seePassword, setSeePassword] = useState(false);
+
+    const { dataRes, error, loading, executePost } = usePost();
+
+    function handleLogin() {
+        const url = 'http://localhost:8000/auth/login'; // Replace with your actual URL
+        executePost(url, session)
+            .then((response) => {
+                console.log('Login successful:', response);
+                sessionStorage.setItem('session', JSON.stringify({ token: response.access_token }));
+                setToken(response.access_token); // Assuming the response contains a token
+                setUser(response.user); // Assuming the response contains user info
+                navigate('/transform');
+            })
+            .catch((err) => {
+                console.error('Login failed:', err);
+                setPasswordOrUsernameIsInvalid(true);
+            });
+    }
 
     return (
         <FormLogin>
@@ -79,9 +101,9 @@ export function Login() {
                 <p>Please enter your details to continue</p>
             </div>
             <InputText
-                label="Username"
-                name="username"
-                value={session.username}
+                label="Email"
+                name="email"
+                value={session.email}
                 onChange={handleChange}
                 placeholder="Enter your username"
             />
@@ -97,7 +119,7 @@ export function Login() {
             <div className="forgot-password">
                 <span>Forgot password?</span>
             </div>
-            <PrimaryButton textButton="Login" onClick={handleSubmit} />
+            <PrimaryButton textButton="Login" onClick={handleLogin} />
             <div className="register">
                 <p>Don't have an account?</p>
                 <span>Register</span>
