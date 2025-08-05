@@ -1,33 +1,23 @@
+// useTokenStore.ts
 import { create } from 'zustand';
 
 interface TokenState {
     token: string | null;
-    isAuthenticated: boolean;
     setToken: (token: string | null) => void;
-    hydrate: () => void;
+    isAuthenticated: boolean;
 }
 
 export const useTokenStore = create<TokenState>((set) => ({
-    token: null,
-    isAuthenticated: false,
-
-    setToken: (token: string | null) => {
+    token: sessionStorage.getItem('session')
+        ? JSON.parse(sessionStorage.getItem('session')!).token
+        : null,
+    isAuthenticated: !!sessionStorage.getItem('session'),
+    setToken: (token) => {
         if (token) {
             sessionStorage.setItem('session', JSON.stringify({ token }));
         } else {
             sessionStorage.removeItem('session');
         }
         set({ token, isAuthenticated: !!token });
-    },
-
-    hydrate: () => {
-        const session = sessionStorage.getItem('session');
-        if (session) {
-            const parsed = JSON.parse(session);
-            set({
-                token: parsed.token,
-                isAuthenticated: !!parsed.token,
-            });
-        }
     },
 }));
