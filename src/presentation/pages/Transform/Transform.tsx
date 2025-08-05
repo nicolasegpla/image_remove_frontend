@@ -26,6 +26,7 @@ import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useUserstore } from '@/store/zustand/useUserstore';
 import { title } from 'process';
 import { useNavigateService } from '@/presentation/routes/useNavigateService/useNavigateService';
+import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 
 function Transform() {
     const { modal, setModal, collapsibleMenu, setCollapsibleMenu } = useContext(GlobalContext);
@@ -33,8 +34,6 @@ function Transform() {
     const { setToken } = useTokenStore();
     const { user } = useUserstore();
     const navigate = useNavigate();
-
-    console.log('User:', user);
 
     const handleLogOut = () => {
         sessionStorage.removeItem('session');
@@ -83,9 +82,15 @@ function Transform() {
         },
     ];
 
+    const { setImageUrl } = useImageSelectStore();
+    const { setImageUrlOriginal, setSelectedFile } = useContext(GlobalContext);
+
     useEffect(() => {
         return () => {
             setCollapsibleMenu(false);
+            setImageUrl('');
+            setImageUrlOriginal('');
+            setSelectedFile(null);
         };
     }, []);
 

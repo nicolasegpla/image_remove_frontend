@@ -20,11 +20,12 @@ const usePostBlobImage = ({
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
 
-    const postBlobImage = async () => {
+    const postBlobImage = async (refresh: () => void) => {
         setLoading(true);
         try {
             const response = await postService({ data, signalAbort, url, token });
             setStateImageUrl(response);
+            refresh();
         } catch (error) {
             setError(true);
         } finally {

@@ -2,7 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
-import { ButtonMini, PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+import {
+    ButtonMini,
+    CounterTokens,
+    PreviewTransform,
+    PrimaryButton,
+} from '@/presentation/components/atoms';
 import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
 import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob';
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
@@ -17,9 +22,11 @@ import {
     urlFetchPostExterna,
 } from '@/constants';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
+import { useGetTokens } from '@/presentation/viewmodels/customhooks/useGetTokens';
+import { useUserstore } from '@/store/zustand/useUserstore';
 
 export function PreviewImageOriginal() {
-    const { typeModel } = useTypeModelStore();
+    const { typeModel, setTypeModel } = useTypeModelStore();
 
     const {
         selectedFile,
@@ -37,10 +44,9 @@ export function PreviewImageOriginal() {
 
     const { setImageUrl, imageUrl } = useImageSelectStore();
     const { token } = useTokenStore();
+    const { user } = useUserstore();
 
     const [abortController, setAbortController] = useState<AbortController | null>(null);
-
-    console.log(abortController);
 
     const handleAbortRequest = () => {
         if (abortController) {
@@ -52,8 +58,6 @@ export function PreviewImageOriginal() {
             setAbortController(controller);
         }
     };
-
-    console.log('Token in PreviewImageOriginal:', token);
 
     const { loading, error, postBlobImage } = usePostBlobImage({
         data: selectedFile,
@@ -76,24 +80,36 @@ export function PreviewImageOriginal() {
         }
     }, [imageUrl]);
 
+    const url = 'https://buildtix.store/auth/users/'; // Replace with actual URL
+    const userid = user?.id || ''; // Ensure user ID is available
+
+    const { refresh, dataTokens } = useGetTokens(userid, url);
+
     const handlePostBlobImageWithGoogleAnalytics = () => {
+        setImageUrl('');
         window.gtag('event', 'click_boton_transformar', {
             event_category: 'interacción',
             event_label: 'transformar imagen',
         });
-        postBlobImage();
+        postBlobImage(refresh);
     };
 
     useEffect(() => {
+        refresh();
         const controller = new AbortController();
         setAbortController(controller);
         return () => {
             controller.abort();
+            setTypeModel('express');
+            setImageUrl('');
         };
     }, []);
 
     return (
         <FormPreview>
+            {typeModel === 'external' && (
+                <CounterTokens initialTokens={dataTokens} actualyTokens={10} />
+            )}
             <PreviewTransform
                 urlImage={imageUrlOriginal || ''}
                 text="No image to show, please select an image."

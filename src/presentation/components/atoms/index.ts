@@ -15,3 +15,4 @@ export * from './ButtonTour/ButtonTour';
 export * from './ButtonMiniMenu/ButtonMiniMenu';
 export * from './CollapsibleMenu/CollapsibleMenu';
 export * from './LogoImage/LogoImage';
+export * from './CounterTokens/CounterTokens';
