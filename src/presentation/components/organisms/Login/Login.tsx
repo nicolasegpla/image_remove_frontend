@@ -52,19 +52,6 @@ export function Login() {
         new Username('juan', 'admin789'),
     ];
 
-    const token = '1234567890';
-
-    const handleSubmit = () => {
-        const username = new Username(session.email, session.password);
-        if (username.validate()) {
-            sessionStorage.setItem('session', JSON.stringify({ token }));
-            setToken(token);
-            navigate('/transform');
-        } else {
-            setPasswordOrUsernameIsInvalid(true);
-        }
-    };
-
     const [seePassword, setSeePassword] = useState(false);
 
     const { dataRes, error, loading, executePost } = usePost();
