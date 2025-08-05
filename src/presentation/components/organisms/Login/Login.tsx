@@ -70,7 +70,7 @@ export function Login() {
     const { dataRes, error, loading, executePost } = usePost();
 
     function handleLogin() {
-        const url = 'http://localhost:8000/auth/login'; // Replace with your actual URL
+        const url = 'https://buildtix.store/auth/login'; // Replace with your actual URL
         executePost(url, session)
             .then((response) => {
                 console.log('Login successful:', response);
