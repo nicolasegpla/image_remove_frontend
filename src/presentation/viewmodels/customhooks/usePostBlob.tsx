@@ -18,7 +18,7 @@ const usePostBlobImage = ({
     token,
 }: UsePostBlobImageProps) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
     const postBlobImage = async (refresh: () => void) => {
         setLoading(true);
@@ -27,7 +27,10 @@ const usePostBlobImage = ({
             setStateImageUrl(response);
             refresh();
         } catch (error) {
-            setError(true);
+            setError(error instanceof Error ? error.message : 'An unexpected error occurred');
+            setTimeout(() => {
+                setError(null);
+            }, 5000); // Clear error after 5 seconds
         } finally {
             setLoading(false);
         }

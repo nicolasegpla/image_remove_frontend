@@ -13,7 +13,7 @@ import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob'
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 
 import './preview-image-original.scss';
-import { StopCircleIcon, StopIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { StopCircleIcon, StopIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import {
     urlFetchPost,
@@ -74,6 +74,8 @@ export function PreviewImageOriginal() {
                     : urlFetchPostExterna,
         token: token || undefined, // Pass the token if available
     });
+
+    console.log('error', error);
 
     useEffect(() => {
         if (imageUrl) {
@@ -137,17 +139,22 @@ export function PreviewImageOriginal() {
                     disabled={imageUrlOriginal ? false : true}
                     loading={loading}
                 />
-                {loading && (
+                {/*loading && (
                     <ButtonMini onClick={handleAbortRequest}>
                         <StopCircleIcon className="button-mini__icon" />
                     </ButtonMini>
-                )}
-                {imageUrlOriginal && (
+                )*/}
+                {imageUrlOriginal && !loading && (
                     <ButtonMini onClick={handleCleanTransform}>
                         <TrashIcon className="button-mini__icon-trash" />
                     </ButtonMini>
                 )}
             </ContainerButtons>
+            {error === '⛔ Prohibido (403) - No tienes permisos.' && (
+                <div className="error-credits">
+                    <p>No tienes creditos suficientes para esta operacion</p>
+                </div>
+            )}
         </FormPreview>
     );
 }

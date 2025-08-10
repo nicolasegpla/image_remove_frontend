@@ -67,11 +67,11 @@ export function PreviewImage() {
                     onClick={!urlImageExistent ? handleDownloadWithGoogleAnalytics : () => {}}
                     disabled={urlImageExistent}
                 />
-                {!urlImageExistent && (
+                {/*!urlImageExistent && (
                     <DijeSelect onClick={() => setOpenSelectDije(true)}>
                         <RectangleGroupIcon className="button-mini__icon-trash" />
                     </DijeSelect>
-                )}
+                )*/}
                 {!urlImageExistent && (
                     <ButtonMini onClick={handleCleanTransform}>
                         <TrashIcon className="button-mini__icon-trash" />

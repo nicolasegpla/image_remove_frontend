@@ -87,9 +87,9 @@ export function Information({}: InformationProps) {
                     subTitleDescription={item.subTitleDescription}
                 />
             ))}
-            <div className="information__footer">
+            {/*<div className="information__footer">
                 <ButtonTour textButton="Start Interactive Tour" onClick={() => {}} />
-            </div>
+            </div>*/}
         </ContainerInfo>
     );
 }

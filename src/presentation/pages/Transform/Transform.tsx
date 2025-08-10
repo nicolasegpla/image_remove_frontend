@@ -1,21 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { title } from 'process';
+import { useContext, useEffect } from 'react';
 
 import {
-    BUttonClosed,
-    ButtonLogOut,
     ButtonMiniMenu,
     CollapsibleMenu,
     ContainerLogo,
-    HeartImageCanvas,
     Infobutton,
     LogoImage,
     Modal,
-    ModuloDijeSelect,
     NavBar,
     SelectModel,
-    SwitchComponent,
 } from '@/presentation/components';
 import {
     Information,
@@ -25,7 +19,6 @@ import {
 } from '@/presentation/components/organisms';
 import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
-import { PickList } from '@/presentation/components/atoms/PickList/PickList';
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useUserstore } from '@/store/zustand/useUserstore';
@@ -38,7 +31,7 @@ function Transform() {
         setModal,
         collapsibleMenu,
         setCollapsibleMenu,
-        openSelectDije,
+        //openSelectDije,
         setOpenSelectDije,
         setImageUrlOriginal,
         setSelectedFile,
@@ -57,10 +50,6 @@ function Transform() {
     };
 
     const { setTypeModel, typeModel } = useTypeModelStore();
-
-    const handleChangeTypeModel = (value: string) => {
-        setTypeModel(value);
-    };
 
     const handleClickOutside = (event: MouseEvent) => {
         const collapsibleMenuElement = document.querySelector('.collapsible-menu');
@@ -107,32 +96,36 @@ function Transform() {
         },
     ];
 
-    const { setImageUrl, imageUrl } = useImageSelectStore();
+    const { setImageUrl } = useImageSelectStore();
 
     const handleSelectTypeModel = (value: string) => {
         setTypeModel(value);
         setOpenSelectModel(false);
     };
 
-    const dataOptionsModels = [
-        {
-            id: 'express',
-            value: 'express',
-            label: 'ClearCut',
-            onChange: (value: string) => handleSelectTypeModel(value),
-        },
-        {
-            id: 'studio',
-            value: 'studio',
-            label: 'HumanPro',
-            onChange: (value: string) => handleSelectTypeModel(value),
-        },
-        {
-            id: 'external',
-            value: 'external',
-            label: 'UltraClean',
-            onChange: (value: string) => handleSelectTypeModel(value),
-        },
+    class TypeModel {
+        id: string;
+        value: string;
+        label: string;
+        onChange: (value: string) => void;
+        constructor(id: string, value: string, label: string, onChange: (value: string) => void) {
+            this.id = id;
+            this.value = value;
+            this.label = label;
+            this.onChange = onChange;
+        }
+    }
+
+    const dataOptionsModels: TypeModel[] = [
+        new TypeModel('express', 'express', 'ClearCut', (value: string) =>
+            handleSelectTypeModel(value)
+        ),
+        new TypeModel('studio', 'studio', 'HumanPro', (value: string) =>
+            handleSelectTypeModel(value)
+        ),
+        new TypeModel('external', 'external', 'UltraClean', (value: string) =>
+            handleSelectTypeModel(value)
+        ),
     ];
 
     useEffect(() => {
@@ -159,8 +152,6 @@ function Transform() {
                     selectIsOpen={openSelectModel}
                     onClick={() => setOpenSelectModel(!openSelectModel)}
                 />
-                {/*<PickList onChange={handleChangeTypeModel} />*/}
-                {/*<ButtonLogOut onClick={handleLogOut} />*/}
                 <ButtonMiniMenu onClick={() => setCollapsibleMenu(!collapsibleMenu)} />
                 {collapsibleMenu && (
                     <CollapsibleMenu
@@ -181,7 +172,7 @@ function Transform() {
                     <Information />
                 </Modal>
             )}
-            {openSelectDije && (
+            {/*openSelectDije && (
                 <Modal>
                     <ModuloDijeSelect>
                         <BUttonClosed onClick={() => setOpenSelectDije(false)} />
@@ -189,7 +180,7 @@ function Transform() {
                         <HeartImageCanvas imageUrl={imageUrl} />
                     </ModuloDijeSelect>
                 </Modal>
-            )}
+            )*/}
         </LayoutTransform>
     );
 }
