@@ -92,7 +92,7 @@ export function Login() {
                 name="email"
                 value={session.email}
                 onChange={handleChange}
-                placeholder="Enter your username"
+                placeholder="Enter your email"
             />
             <InputPassword
                 setSeePassword={setSeePassword}
