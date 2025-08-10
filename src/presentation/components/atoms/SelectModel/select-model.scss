@@ -1,0 +1,58 @@
+@import '@/presentation/styles/index.scss';
+
+.select-model {
+    position: relative;
+    width: auto;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    &__span {
+        font-size: 16px;
+        color: #6b7280;
+        font-weight: 500;
+    }
+    &__button {
+        width: 120px;
+        height: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        &__p {
+            font-size: 16px;
+            color: #111827;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        &__icon {
+            width: 16px;
+            color: #000;
+        }
+    }
+    &__Box-options {
+        position: absolute;
+        top: 45px;
+        width: 160px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 10;
+        &__option {
+            padding: 8px 12px;
+            cursor: pointer;
+            &:hover {
+                background-color: #f3f4f6;
+            }
+            &__p {
+                font-size: 16px;
+                color: #111827;
+                font-weight: 500;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

@@ -1,21 +1,27 @@
+import { useContext } from 'react';
+
 import {
     ButtonMiniMenu,
     CollapsibleMenu,
     ContainerLogo,
     LogoImage,
     NavBar,
+    TableAllUser,
 } from '@/presentation/components';
 import { LayoutAdmin } from '@/presentation/layouts';
 import { useNavigateService } from '@/presentation/routes/useNavigateService/useNavigateService';
+import { useGetAllUsers } from '@/presentation/viewmodels/customhooks/useGetAllUsers';
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
 import { useUserstore } from '@/store/zustand/useUserstore';
-import { useContext } from 'react';
+import { useUserStore } from '@/store/zustand/useUserSelectAdminStore';
 
 function ModuloAdmin() {
-    const { collapsibleMenu, setCollapsibleMenu } = useContext(GlobalContext);
+    const { collapsibleMenu, setCollapsibleMenu, setOpenSelectUserFromAdmin } =
+        useContext(GlobalContext);
     const { user } = useUserstore();
     const { setToken } = useTokenStore();
+    const { setUser, user: userAdminSelect } = useUserStore();
 
     const { navigateToModuloAdmin, navigateToTransform, navigateToLogin } = useNavigateService();
 
@@ -35,6 +41,28 @@ function ModuloAdmin() {
             onClick: () => navigateToModuloAdmin(),
         },
     ];
+
+    const { dataUsers } = useGetAllUsers('http://localhost:8000/auth/users');
+
+    console.log('dataUsers:', dataUsers);
+
+    interface User {
+        id: string;
+        email: string;
+        id_api: string;
+        status: boolean;
+        tokens: number;
+        type_user: string;
+        country: string;
+    }
+
+    function openInfoUser(user: User) {
+        setOpenSelectUserFromAdmin(true);
+        setUser(user);
+    }
+
+    console.log('userAdminSelect:', userAdminSelect);
+
     return (
         <LayoutAdmin>
             <ContainerLogo>
@@ -51,6 +79,7 @@ function ModuloAdmin() {
                     />
                 )}
             </NavBar>
+            <TableAllUser dataUsers={dataUsers} openInfoUser={openInfoUser} />
         </LayoutAdmin>
     );
 }

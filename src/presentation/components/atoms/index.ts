@@ -16,3 +16,6 @@ export * from './ButtonMiniMenu/ButtonMiniMenu';
 export * from './CollapsibleMenu/CollapsibleMenu';
 export * from './LogoImage/LogoImage';
 export * from './CounterTokens/CounterTokens';
+export * from './DijeSelect/DijeSelect';
+export * from './HeartImageCanvas/HeartImageCanvas';
+export * from './SelectModel/SelectModel';

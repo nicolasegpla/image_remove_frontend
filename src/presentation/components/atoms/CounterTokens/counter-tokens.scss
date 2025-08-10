@@ -12,7 +12,7 @@
     top: 1rem;
     left: 2rem;
     &__credits {
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: semi-bold;
         color: #000; // Neutral color for credits
     }
@@ -21,17 +21,17 @@
         align-items: center;
         gap: 0.5rem;
         &__initial {
-            font-size: 1.125rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 500;
             color: #000; // Green for initial tokens
         }
         &__separate {
-            font-size: 1.125rem;
+            font-size: 1rem;
             color: #000; // Neutral color for separator
         }
         &__actualy {
-            font-size: 1.125rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 500;
             color: #757575; // Red for actual tokens   
         }
     }

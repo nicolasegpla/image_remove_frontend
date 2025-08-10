@@ -13,7 +13,7 @@ import usePostBlobImage from '@/presentation/viewmodels/customhooks/usePostBlob'
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 
 import './preview-image-original.scss';
-import { StopCircleIcon, StopIcon } from '@heroicons/react/24/outline';
+import { StopCircleIcon, StopIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 import {
     urlFetchPost,
@@ -34,6 +34,7 @@ export function PreviewImageOriginal() {
         setImageUrlOriginal,
         setUrlImageExistent,
         setSelectedFile,
+        urlImageExistent,
     } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -94,6 +95,13 @@ export function PreviewImageOriginal() {
         postBlobImage(refresh);
     };
 
+    const handleCleanTransform = () => {
+        setImageUrl('');
+        setImageUrlOriginal(null);
+        setSelectedFile(null);
+        setUrlImageExistent(true);
+    };
+
     useEffect(() => {
         refresh();
         const controller = new AbortController();
@@ -132,6 +140,11 @@ export function PreviewImageOriginal() {
                 {loading && (
                     <ButtonMini onClick={handleAbortRequest}>
                         <StopCircleIcon className="button-mini__icon" />
+                    </ButtonMini>
+                )}
+                {imageUrlOriginal && (
+                    <ButtonMini onClick={handleCleanTransform}>
+                        <TrashIcon className="button-mini__icon-trash" />
                     </ButtonMini>
                 )}
             </ContainerButtons>

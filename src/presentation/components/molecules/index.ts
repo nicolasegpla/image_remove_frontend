@@ -5,3 +5,5 @@ export * from './FormPreview/FormPreview';
 export * from './ContainerButtons/ContainerButtons';
 export * from './ContainerInfo/ContainerInfo';
 export * from './CardModelInfor/CardModelInfor';
+export * from './ModuloDijeSelect/ModuloDijeSelect';
+export * from './TableAllUser/TableAllUser';

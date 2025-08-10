@@ -11,6 +11,12 @@ interface GlobalContextProps {
     setModal: (value: boolean) => void;
     collapsibleMenu: boolean;
     setCollapsibleMenu: (value: boolean) => void;
+    openSelectDije: boolean;
+    setOpenSelectDije: (value: boolean) => void;
+    openSelectUserFromAdmin: boolean;
+    setOpenSelectUserFromAdmin: (value: boolean) => void;
+    openSelectModel: boolean;
+    setOpenSelectModel: (value: boolean) => void;
 }
 
 const GlobalContext = createContext<GlobalContextProps>({
@@ -24,6 +30,12 @@ const GlobalContext = createContext<GlobalContextProps>({
     setModal: () => {},
     collapsibleMenu: false,
     setCollapsibleMenu: () => {},
+    openSelectDije: false,
+    setOpenSelectDije: () => {},
+    openSelectUserFromAdmin: false,
+    setOpenSelectUserFromAdmin: () => {},
+    openSelectModel: false,
+    setOpenSelectModel: () => {},
 });
 
 const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -32,6 +44,9 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [imageUrlOriginal, setImageUrlOriginal] = useState<string | null>(null);
     const [modal, setModal] = useState<boolean>(false);
     const [collapsibleMenu, setCollapsibleMenu] = useState<boolean>(false);
+    const [openSelectDije, setOpenSelectDije] = useState<boolean>(false);
+    const [openSelectUserFromAdmin, setOpenSelectUserFromAdmin] = useState<boolean>(false);
+    const [openSelectModel, setOpenSelectModel] = useState<boolean>(false);
 
     return (
         <GlobalContext.Provider
@@ -46,6 +61,12 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
                 setModal,
                 collapsibleMenu,
                 setCollapsibleMenu,
+                openSelectDije,
+                setOpenSelectDije,
+                openSelectUserFromAdmin,
+                setOpenSelectUserFromAdmin,
+                openSelectModel,
+                setOpenSelectModel,
             }}
         >
             {children}

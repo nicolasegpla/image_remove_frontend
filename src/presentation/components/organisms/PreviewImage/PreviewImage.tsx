@@ -1,17 +1,27 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
-import { ButtonMini, PreviewTransform, PrimaryButton } from '@/presentation/components/atoms';
+import {
+    ButtonMini,
+    DijeSelect,
+    PreviewTransform,
+    PrimaryButton,
+} from '@/presentation/components/atoms';
 
 import './preview-image.scss';
-import { TrashIcon } from '@heroicons/react/24/outline';
+import { RectangleGroupIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 export function PreviewImage() {
     const { imageUrl, setImageUrl } = useImageSelectStore();
-    const { setUrlImageExistent, urlImageExistent, setImageUrlOriginal, setSelectedFile } =
-        useContext(GlobalContext);
+    const {
+        setUrlImageExistent,
+        urlImageExistent,
+        setImageUrlOriginal,
+        setSelectedFile,
+        setOpenSelectDije,
+    } = useContext(GlobalContext);
 
     const handleDownload = () => {
         const link = document.createElement('a');
@@ -35,6 +45,15 @@ export function PreviewImage() {
         setUrlImageExistent(true);
     };
 
+    useEffect(() => {
+        return () => {
+            setImageUrl('');
+            setImageUrlOriginal(null);
+            setSelectedFile(null);
+            setUrlImageExistent(true);
+        };
+    }, []);
+
     return (
         <FormPreview>
             <PreviewTransform
@@ -48,6 +67,11 @@ export function PreviewImage() {
                     onClick={!urlImageExistent ? handleDownloadWithGoogleAnalytics : () => {}}
                     disabled={urlImageExistent}
                 />
+                {!urlImageExistent && (
+                    <DijeSelect onClick={() => setOpenSelectDije(true)}>
+                        <RectangleGroupIcon className="button-mini__icon-trash" />
+                    </DijeSelect>
+                )}
                 {!urlImageExistent && (
                     <ButtonMini onClick={handleCleanTransform}>
                         <TrashIcon className="button-mini__icon-trash" />
