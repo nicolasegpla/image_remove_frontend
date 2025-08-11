@@ -2,13 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 
 import {
+    ButtonClosedSecondary,
     ButtonMiniMenu,
     CollapsibleMenu,
+    ContainerImageEditor,
     ContainerLogo,
     Infobutton,
     LogoImage,
     Modal,
     NavBar,
+    NavCloserModals,
     SelectModel,
 } from '@/presentation/components';
 import {
@@ -17,7 +20,11 @@ import {
     PreviewImageOriginal,
     SelectImage,
 } from '@/presentation/components/organisms';
-import { LayoutTransform, PrimaryContainerContentLayout } from '@/presentation/layouts';
+import {
+    LayoutEditImage,
+    LayoutTransform,
+    PrimaryContainerContentLayout,
+} from '@/presentation/layouts';
 import { useTokenStore } from '@/store/zustand/useTokenstore';
 import { useTypeModelStore } from '@/store/zustand/useTypemodelStore';
 import { GlobalContext } from '@/store/context/global/GlobalContext';
@@ -37,6 +44,8 @@ function Transform() {
         setSelectedFile,
         setOpenSelectModel,
         openSelectModel,
+        openEditImage,
+        setOpenEditImage,
     } = useContext(GlobalContext);
 
     const { setToken } = useTokenStore();
@@ -170,6 +179,18 @@ function Transform() {
             {modal && (
                 <Modal>
                     <Information />
+                </Modal>
+            )}
+            {openEditImage && (
+                <Modal>
+                    <LayoutEditImage>
+                        <NavCloserModals>
+                            <ButtonClosedSecondary onClick={() => setOpenEditImage(false)} />
+                        </NavCloserModals>
+                        <ContainerImageEditor>
+                            <h1>edit image</h1>
+                        </ContainerImageEditor>
+                    </LayoutEditImage>
                 </Modal>
             )}
             {/*openSelectDije && (

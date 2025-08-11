@@ -7,3 +7,5 @@ export * from './ContainerInfo/ContainerInfo';
 export * from './CardModelInfor/CardModelInfor';
 export * from './ModuloDijeSelect/ModuloDijeSelect';
 export * from './TableAllUser/TableAllUser';
+export * from './NavCloserModals/NavCloserModals';
+export * from './ContainerImageEditor/ContainerImageEditor';

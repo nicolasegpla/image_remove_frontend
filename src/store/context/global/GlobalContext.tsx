@@ -17,6 +17,8 @@ interface GlobalContextProps {
     setOpenSelectUserFromAdmin: (value: boolean) => void;
     openSelectModel: boolean;
     setOpenSelectModel: (value: boolean) => void;
+    openEditImage: boolean;
+    setOpenEditImage: (value: boolean) => void;
 }
 
 const GlobalContext = createContext<GlobalContextProps>({
@@ -36,6 +38,8 @@ const GlobalContext = createContext<GlobalContextProps>({
     setOpenSelectUserFromAdmin: () => {},
     openSelectModel: false,
     setOpenSelectModel: () => {},
+    openEditImage: false,
+    setOpenEditImage: () => {},
 });
 
 const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -47,6 +51,7 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [openSelectDije, setOpenSelectDije] = useState<boolean>(false);
     const [openSelectUserFromAdmin, setOpenSelectUserFromAdmin] = useState<boolean>(false);
     const [openSelectModel, setOpenSelectModel] = useState<boolean>(false);
+    const [openEditImage, setOpenEditImage] = useState<boolean>(false);
 
     return (
         <GlobalContext.Provider
@@ -67,6 +72,8 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
                 setOpenSelectUserFromAdmin,
                 openSelectModel,
                 setOpenSelectModel,
+                openEditImage,
+                setOpenEditImage,
             }}
         >
             {children}

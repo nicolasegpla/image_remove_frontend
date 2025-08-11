@@ -22,6 +22,7 @@ export function PreviewImage() {
         setImageUrlOriginal,
         setSelectedFile,
         setOpenSelectDije,
+        setOpenEditImage,
     } = useContext(GlobalContext);
 
     const handleDownload = () => {
@@ -44,6 +45,10 @@ export function PreviewImage() {
         setImageUrlOriginal(null);
         setSelectedFile(null);
         setUrlImageExistent(true);
+    };
+
+    const handleClickOpenEditImage = () => {
+        setOpenEditImage(true);
     };
 
     useEffect(() => {
@@ -73,7 +78,7 @@ export function PreviewImage() {
                         <RectangleGroupIcon className="button-mini__icon-trash" />
                     </DijeSelect>
                 )*/}
-                {!urlImageExistent && <ButtonEditImage onClick={() => setOpenSelectDije(true)} />}
+                {!urlImageExistent && <ButtonEditImage onClick={handleClickOpenEditImage} />}
                 {!urlImageExistent && (
                     <ButtonMini onClick={handleCleanTransform}>
                         <TrashIcon className="button-mini__icon-trash" />

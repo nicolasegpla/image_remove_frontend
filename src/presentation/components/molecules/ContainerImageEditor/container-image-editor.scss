@@ -1,0 +1,11 @@
+@import '@/presentation/styles/index.scss';
+
+.container-image-editor {
+    width: 100%;
+    height: calc(100% - 92px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    gap: 1.5rem;
+}
