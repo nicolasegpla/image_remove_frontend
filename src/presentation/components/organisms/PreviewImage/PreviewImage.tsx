@@ -4,6 +4,7 @@ import { GlobalContext } from '@/store/context/global/GlobalContext';
 import { useImageSelectStore } from '@/store/zustand/useImageSelectstore';
 import { ContainerButtons, FormPreview } from '@/presentation/components/molecules';
 import {
+    ButtonEditImage,
     ButtonMini,
     DijeSelect,
     PreviewTransform,
@@ -72,6 +73,7 @@ export function PreviewImage() {
                         <RectangleGroupIcon className="button-mini__icon-trash" />
                     </DijeSelect>
                 )*/}
+                {!urlImageExistent && <ButtonEditImage onClick={() => setOpenSelectDije(true)} />}
                 {!urlImageExistent && (
                     <ButtonMini onClick={handleCleanTransform}>
                         <TrashIcon className="button-mini__icon-trash" />

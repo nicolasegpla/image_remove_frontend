@@ -19,3 +19,4 @@ export * from './CounterTokens/CounterTokens';
 export * from './DijeSelect/DijeSelect';
 export * from './HeartImageCanvas/HeartImageCanvas';
 export * from './SelectModel/SelectModel';
+export * from './ButtonEditImage/ButtonEditImage';
